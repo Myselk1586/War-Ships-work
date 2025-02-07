@@ -10,8 +10,10 @@ namespace War_Ships_work
     internal class Program
     {
         public static string name = "";
+
         public static int totalGuesses = 0;
         public static int validGuesses = 0;
+
 
 
 
