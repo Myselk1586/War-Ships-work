@@ -10,7 +10,10 @@ namespace War_Ships_work
     internal class Program
     {
         public static string name = "";
-        public static int totalGuesses = 1;
+
+        public static int totalGuesses = 0;
+        public static int validGuesses = 0;
+
 
 
 
@@ -25,10 +28,27 @@ namespace War_Ships_work
         private static void GetRowColumn(ref int Row, ref int Column)
         {
             Console.WriteLine();
-            Console.Write("Please enter column: ");
-            Column = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Please enter row: ");
-            Row = Convert.ToInt32(Console.ReadLine());
+            bool valid = true;
+            while (valid == true)
+            {
+                Console.Write("Please enter column: ");
+                Column = Convert.ToInt32(Console.ReadLine());
+                if (Column >= 0 && Column <= 9)
+                {
+                    valid = false;
+                }
+            }
+            valid = true;
+            
+            while (valid == true)
+            {
+                Console.Write("Please enter row: ");
+                Row = Convert.ToInt32(Console.ReadLine());
+                if (Row >= 0 && Row <= 9)
+                {
+                    valid = false;
+                }
+            }
             Console.WriteLine();
         }
 
@@ -40,15 +60,23 @@ namespace War_Ships_work
             if (Board[Row, Column] == 'm' || Board[Row, Column] == 'h')
             {
                 Console.WriteLine("Sorry, you have already shot at the square (" + Column + "," + Row + "). Please try again.");
+                totalGuesses++;
+                Console.WriteLine("You have had " + totalGuesses + " guesses and " + validGuesses + " valid Guesses");
+
             }
             else if (Board[Row, Column] == '-')
             {
                 Console.WriteLine("Sorry, (" + Column + "," + Row + ") is a miss.");
+                totalGuesses++;
+                Console.WriteLine("You have had " + totalGuesses + " guesses and " + validGuesses + " valid Guesses");
+
                 Board[Row, Column] = 'm';
             }
             else
             {
                 Console.WriteLine("Hit at (" + Column + "," + Row + ").");
+                totalGuesses++;
+                validGuesses++;
                 Board[Row, Column] = 'h';
             }
         }
@@ -106,7 +134,7 @@ namespace War_Ships_work
                     }
                     Valid = ValidateBoatPosition(Board, Ship, Row, Column, Orientation);
                 }
-                Console.WriteLine("Computer placing the " + Ship.Name);
+                Console.WriteLine("Computer placing the " + Ship.Name + "with size: " + Ship.Size);
                 PlaceShip(ref Board, Ship, Row, Column, Orientation);
             }
         }
@@ -229,10 +257,17 @@ namespace War_Ships_work
 
         private static int GetMainMenuChoice()
         {
-            int Choice = 0;
+            int Choice;
             Console.Write("Please enter your choice: ");
             Choice = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
+            while (!(Choice == 1 || Choice == 2 || Choice == 9))
+            {
+                Console.Write("Please enter your choice: ");
+                Choice = Convert.ToInt32(Console.ReadLine());
+            }
+
+
             return Choice;
         }
 
@@ -247,6 +282,7 @@ namespace War_Ships_work
                 if (GameWon == true)
                 {
                     Console.WriteLine("All ships sunk!");
+                    Console.WriteLine(name + " you scored a total of: " + totalGuesses);
                     Console.WriteLine();
                 }
             }
@@ -254,17 +290,23 @@ namespace War_Ships_work
 
         private static void SetUpShips(ref ShipType[] Ships)
         {
-            Ships[0].Name = "Aircraft Carrier";
-            Ships[0].Size = 5;
-            Ships[1].Name = "Battleship";
-            Ships[1].Size = 4;
-            Ships[2].Name = "Submarine";
-            Ships[2].Size = 3;
-            Ships[3].Name = "Destroyer";
+            Ships[0].Name = ("Aircraft Carrier");
+            Ships[0].Size = (5);
+            Ships[1].Name = ("Battleship");
+            Ships[1].Size = (4);
+            Ships[2].Name = ("Submarine");
+            Ships[2].Size = (3);
+            Ships[3].Name = ("Destroyer");
+            Ships[3].Size = (3);
+            Ships[4].Name = ("Patrol Boat");
+            Ships[4].Size = (2);
 
-            Ships[3].Size = 3;
-            Ships[4].Name = "Patrol Boat";
-            Ships[4].Size = 2;
+        }
+
+        private static void AskName()
+        {
+            Console.WriteLine("What is your name? ");
+            name = Console.ReadLine();
         }
 
         static void Main(string[] args)
@@ -276,6 +318,8 @@ namespace War_Ships_work
             {
                 SetUpBoard(ref Board);
                 SetUpShips(ref Ships);
+                AskName();
+
                 DisplayMenu();
                 MenuOption = GetMainMenuChoice();
                 if (MenuOption == 1)
