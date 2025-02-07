@@ -9,6 +9,8 @@ namespace War_Ships_work
 {
     internal class Program
     {
+        public static string name = "";
+        public static int totalGuesses = 0;
         public struct ShipType
         {
             public string Name;
@@ -256,6 +258,7 @@ namespace War_Ships_work
             Ships[2].Name = "Submarine";
             Ships[2].Size = 3;
             Ships[3].Name = "Destroyer";
+
             Ships[3].Size = 3;
             Ships[4].Name = "Patrol Boat";
             Ships[4].Size = 2;
