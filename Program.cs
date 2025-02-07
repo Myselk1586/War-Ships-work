@@ -26,10 +26,27 @@ namespace War_Ships_work
         private static void GetRowColumn(ref int Row, ref int Column)
         {
             Console.WriteLine();
-            Console.Write("Please enter column: ");
-            Column = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Please enter row: ");
-            Row = Convert.ToInt32(Console.ReadLine());
+            bool valid = true;
+            while (valid == true)
+            {
+                Console.Write("Please enter column: ");
+                Column = Convert.ToInt32(Console.ReadLine());
+                if (Column >= 0 && Column <= 9)
+                {
+                    valid = false;
+                }
+            }
+            valid = true;
+            
+            while (valid == true)
+            {
+                Console.Write("Please enter row: ");
+                Row = Convert.ToInt32(Console.ReadLine());
+                if (Row >= 0 && Row <= 9)
+                {
+                    valid = false;
+                }
+            }
             Console.WriteLine();
         }
 
