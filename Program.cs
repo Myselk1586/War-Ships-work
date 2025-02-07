@@ -12,6 +12,7 @@ namespace War_Ships_work
         public static string name = "";
         public static int totalGuesses = 0;
 
+
         public struct ShipType
         {
             public string Name;
