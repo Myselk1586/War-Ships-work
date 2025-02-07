@@ -9,9 +9,7 @@ namespace War_Ships_work
 {
     internal class Program
     {
-        static void Main(string[] args)
-        {
-            public struct ShipType
+        public struct ShipType
         {
             public string Name;
             public int Size;
@@ -286,6 +284,5 @@ namespace War_Ships_work
                 }
             }
         }
-    }
     }
 }
