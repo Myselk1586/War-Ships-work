@@ -247,6 +247,8 @@ namespace War_Ships_work
                 Console.Write("Please enter your choice: ");
                 Choice = Convert.ToInt32(Console.ReadLine());
             }
+
+
             return Choice;
         }
 
