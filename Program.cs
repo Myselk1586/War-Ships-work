@@ -29,39 +29,62 @@ namespace War_Ships_work
         {
             Console.WriteLine();
             bool isvalid = false;
-            int chosenColumn = 0;
+            
             
 
-            while (!isvalid)
+            while(!isvalid)
             {
                 Console.Write("Please enter column: ");
-                Column = int.Parse(Console.ReadLine());
+                string input = Console.ReadLine();
+
                 try
                 {
-                    chosenColumn = int.Parse(Column);
+                    int chosenColumn = int.Parse(input);
                     if (Column >= 0 && Column <= 9)
                     {
+                        Column = chosenColumn;
                         isvalid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You must enter an Integer between 0 and 9");
                     }
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Invalid input, please try again.");
-                    continue;
+                    Console.WriteLine("You must enter an integer between 0 and 9");
+                    
                 }
-                
             }
-            isvalid = true;
             
-            while (!isvalid)
+            while(!isvalid)
             {
                 Console.Write("Please enter row: ");
-                Row = Convert.ToInt32(Console.ReadLine());
-                if (Row >= 0 && Row <= 9)
+                string input = Console.ReadLine();
+
+                try
                 {
-                    isvalid = true;
+                    int chosenRow = int.Parse(input);
+                    if (Column >= 0 && Column <= 9)
+                    {
+                        Row = chosenRow;
+                        isvalid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You must enter an integer between 0 and 9");
+                        Console.WriteLine("Enter Row: ");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("You must enter an integer between 0 and 9");
+                    Console.WriteLine("Enter Row: ");
+
                 }
             }
+
+            
             Console.WriteLine();
         }
 
