@@ -28,25 +28,38 @@ namespace War_Ships_work
         private static void GetRowColumn(ref int Row, ref int Column)
         {
             Console.WriteLine();
-            bool valid = true;
-            while (valid == true)
+            bool isvalid = false;
+            int chosenColumn = 0;
+            
+
+            while (!isvalid)
             {
                 Console.Write("Please enter column: ");
-                Column = Convert.ToInt32(Console.ReadLine());
-                if (Column >= 0 && Column <= 9)
+                Column = int.Parse(Console.ReadLine());
+                try
                 {
-                    valid = false;
+                    chosenColumn = int.Parse(Column);
+                    if (Column >= 0 && Column <= 9)
+                    {
+                        isvalid = true;
+                    }
                 }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input, please try again.");
+                    continue;
+                }
+                
             }
-            valid = true;
+            isvalid = true;
             
-            while (valid == true)
+            while (!isvalid)
             {
                 Console.Write("Please enter row: ");
                 Row = Convert.ToInt32(Console.ReadLine());
                 if (Row >= 0 && Row <= 9)
                 {
-                    valid = false;
+                    isvalid = true;
                 }
             }
             Console.WriteLine();
@@ -257,18 +270,37 @@ namespace War_Ships_work
 
         private static int GetMainMenuChoice()
         {
-            int Choice;
-            Console.Write("Please enter your choice: ");
-            Choice = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            while (!(Choice == 1 || Choice == 2 || Choice == 9))
+            int Chosen;
+            String Choice;
+            
+            while (true)
             {
                 Console.Write("Please enter your choice: ");
-                Choice = Convert.ToInt32(Console.ReadLine());
+                Choice = Console.ReadLine();
+
+                try
+                {
+                    Chosen = int.Parse(Choice);
+                    if (Chosen == 1 || Chosen == 2 || Chosen == 9)
+                    {
+                        break; 
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice! Please enter 1, 2, or 9.");
+                    }
+                    
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input, please try again.");
+                }
+                
             }
+            
 
 
-            return Choice;
+            return Chosen;
         }
 
         private static void PlayGame(ref char[,] Board, ref ShipType[] Ships)
