@@ -10,10 +10,9 @@ namespace War_Ships_work
     internal class Program
     {
         public static string name = "";
-
         public static int totalGuesses = 0;
         public static int validGuesses = 0;
-
+        const int numOfShips = 7;
 
 
 
@@ -152,7 +151,7 @@ namespace War_Ships_work
             int Row = 0;
             int Column = 0;
             int HorV = 0;
-            foreach (var Ship in Ships)
+            for (int i = 0; i < numOfShips; i++)
             {
                 Valid = false;
                 while (Valid == false)
@@ -168,14 +167,15 @@ namespace War_Ships_work
                     {
                         Orientation = 'h';
                     }
-                    Valid = ValidateBoatPosition(Board, Ship, Row, Column, Orientation);
+                    Valid = ValidateBoatPosition(Board, Ships[i], Row, Column, Orientation);
                 }
-                Console.WriteLine("Computer placing the " + Ship.Name + "with size: " + Ship.Size);
-                PlaceShip(ref Board, Ship, Row, Column, Orientation);
+                Console.WriteLine("Computer placing the " + Ships[i].Name + "with size: " + Ships[i].Size);
+                int I = i;
+                PlaceShip(ref Board, Ships, Row, Column, Orientation);
             }
         }
 
-        private static void PlaceShip(ref char[,] Board, ShipType Ship, int Row, int Column, char Orientation)
+        private static void PlaceShip(ref char[,] Board, ShipType Ship[], int Row, int Column, char Orientation)
         {
             if (Orientation == 'v')
             {
